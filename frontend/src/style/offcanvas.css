@@ -1,0 +1,22 @@
+/* Offcanvas Styles */
+.offcanvas-popup {
+  transition: transform 0.3s ease-in-out;
+}
+
+.offcanvas-popup.translate-x-full {
+  transform: translateX(100%);
+}
+
+.offcanvas-popup.translate-x-0 {
+  transform: translateX(0);
+}
+
+/* Ensure offcanvas is above other content */
+.offcanvas-popup {
+  z-index: 9999;
+}
+
+/* Body scroll lock when offcanvas is open */
+body.offcanvas-open {
+  overflow: hidden;
+}
