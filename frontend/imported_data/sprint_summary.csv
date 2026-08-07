@@ -1,0 +1,5 @@
+sprint_id,sprint_start_date,sprint_end_date,team_size,planned_points,committed_points,completed_points,scope_change_points,velocity_points,throughput_completed_issues,commit_to_complete_ratio,defects_in_sprint,defect_escape_rate,carryover_points,removed_points
+SP-4,2026-05-11,2026-05-31,9,180,170,155,10,155,62,0.91,12,0.12,15,5
+SP-3,2026-04-20,2026-05-10,9,185,175,165,15,165,66,0.94,14,0.13,12,8
+SP-2,2026-03-30,2026-04-19,9,190,180,170,5,170,68,0.94,11,0.11,10,6
+SP-1,2026-03-09,2026-03-29,9,175,165,160,-5,160,64,0.97,9,0.10,8,7

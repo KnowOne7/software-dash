@@ -1,0 +1,17 @@
+sprint_id,wip_bucket,count_issues,avg_age_days,median_age_days
+SP-4,0-3_days,28,2.2,2
+SP-4,4-7_days,19,5.6,6
+SP-4,8-14_days,12,10.5,10
+SP-4,15+_days,7,18.2,16
+SP-3,0-3_days,26,2.1,2
+SP-3,4-7_days,21,5.7,6
+SP-3,8-14_days,13,10.8,11
+SP-3,15+_days,8,19.0,17
+SP-2,0-3_days,24,2.0,2
+SP-2,4-7_days,20,5.5,6
+SP-2,8-14_days,14,11.2,11
+SP-2,15+_days,7,18.5,16
+SP-1,0-3_days,25,2.1,2
+SP-1,4-7_days,18,5.4,6
+SP-1,8-14_days,13,10.6,10
+SP-1,15+_days,9,20.0,18

@@ -1,0 +1,37 @@
+sprint_id,person,role,completed_issues,completed_defects,story_points_completed,estimated_work_days_used
+SP-4,Alice,Backend,14,3,55,12
+SP-4,Ben,Frontend,10,1,35,9
+SP-4,Chloe,QA,9,4,28,9
+SP-4,Diego,Mobile,8,1,30,8
+SP-4,Eva,Tech Lead,11,1,40,10
+SP-4,Farah,Data/ML,7,0,22,7
+SP-4,Gus,Infra,6,1,18,6
+SP-4,Harper,Product Eng,9,1,29,8
+SP-4,Ian,Security/Platform,8,1,24,7
+SP-3,Alice,Backend,15,3,58,13
+SP-3,Ben,Frontend,11,1,38,10
+SP-3,Chloe,QA,10,5,30,10
+SP-3,Diego,Mobile,9,2,33,9
+SP-3,Eva,Tech Lead,12,1,45,11
+SP-3,Farah,Data/ML,8,0,26,8
+SP-3,Gus,Infra,7,2,20,7
+SP-3,Harper,Product Eng,10,1,32,9
+SP-3,Ian,Security/Platform,9,1,27,8
+SP-2,Alice,Backend,13,2,52,12
+SP-2,Ben,Frontend,12,1,40,10
+SP-2,Chloe,QA,10,4,29,10
+SP-2,Diego,Mobile,8,1,31,8
+SP-2,Eva,Tech Lead,11,1,41,10
+SP-2,Farah,Data/ML,7,0,23,7
+SP-2,Gus,Infra,6,1,19,6
+SP-2,Harper,Product Eng,9,1,30,8
+SP-2,Ian,Security/Platform,8,1,25,7
+SP-1,Alice,Backend,14,2,50,12
+SP-1,Ben,Frontend,10,1,36,9
+SP-1,Chloe,QA,9,3,27,9
+SP-1,Diego,Mobile,9,1,34,9
+SP-1,Eva,Tech Lead,10,1,39,10
+SP-1,Farah,Data/ML,6,0,20,6
+SP-1,Gus,Infra,7,1,21,7
+SP-1,Harper,Product Eng,8,1,26,8
+SP-1,Ian,Security/Platform,7,1,23,7
