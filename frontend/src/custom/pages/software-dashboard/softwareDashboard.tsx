@@ -5,19 +5,19 @@ import { all_routes } from '../../../routes/all_routes';
 import PredefinedDatePicker from '../../../components/common-date-range-picker/PredefinedDatePicker';
 import CollapseIcons from '../../../components/collapse-icons/collapseIcons';
 import CommonFooter from '../../../components/common-footer/commonFooter';
-import EvmChart from '../../../charts/evmChart';
+import EvmChart from '../../charts/evmChart';
 import evmCsvData from '../../../../imported_data/evm.csv?raw';
-import ChartVelocity from "../../../charts/chartVelocity";
-import ChartBurnProxy from "../../../charts/chartBurnProxy";
-import ChartWorkloadProxy from "../../../charts/ChartWorkloadProxy";
-import { parseCsv, type Row } from "../../../charts/parseCsv";
+import ChartVelocity from "../../charts/chartVelocity";
+import ChartBurnProxy from "../../charts/chartBurnProxy";
+import ChartWorkloadProxy from "../../charts/ChartWorkloadProxy";
+import { parseCsv, type Row } from "../../charts/parseCsv";
 import sprintSummaryCsv from "../../../../imported_data/sprint_summary.csv?raw"; // adjust this path if needed
 import burnProxyCsv from "../../../../imported_data/burn_proxy.csv?raw";
 import perPersonCsv from "../../../../imported_data/per_person.csv?raw";
 import MarkdownBlock from '../../../components/markdown/MarkdownBlock';
-import evmMarkdown from '../../../charts/evm.md?raw';
-import flowChartMarkdown from '../../../charts/flowchart.md?raw';
-import EvmStack, { type EvmPoint } from '../../../charts/evmStack';
+import evmMarkdown from '../../charts/evm.md?raw';
+import flowChartMarkdown from '../../charts/flowchart.md?raw';
+import EvmStack, { type EvmPoint } from '../../charts/evmStack';
 
 const normalizeHeader = (value: string) =>
   value.toLowerCase().replace(/[^a-z0-9]+/g, '');

@@ -8,6 +8,53 @@ type Task = {
   adaptive: boolean;
 };
 
+const API_BASE_URL = "http://localhost:5000";
+
+const formatDate = (value: Date) => {
+  const yyyy = value.getFullYear();
+  const mm = String(value.getMonth() + 1).padStart(2, "0");
+  const dd = String(value.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+};
+
+const getAnchorDate = (tasks: Task[]) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const latestTask = tasks[tasks.length - 1];
+  if (!latestTask?.dueDate) {
+    return today;
+  }
+
+  const latestDueDate = new Date(`${latestTask.dueDate}T00:00:00`);
+  return latestDueDate.getTime() > today.getTime() ? latestDueDate : today;
+};
+
+const getBusinessDueDate = (days: number, anchorDate: Date) => {
+  const start = new Date(anchorDate);
+  start.setHours(0, 0, 0, 0);
+
+  if (days <= 0) {
+    const candidate = new Date(start);
+    while (candidate.getDay() === 0 || candidate.getDay() === 6) {
+      candidate.setDate(candidate.getDate() + 1);
+    }
+    return formatDate(candidate);
+  }
+
+  const candidate = new Date(start);
+  let remainingDays = days;
+
+  while (remainingDays > 0) {
+    candidate.setDate(candidate.getDate() + 1);
+    if (candidate.getDay() !== 0 && candidate.getDay() !== 6) {
+      remainingDays -= 1;
+    }
+  }
+
+  return formatDate(candidate);
+};
+
 const CreateTaskScheduler = () => {
   const [form, setForm] = useState({
     // Editable until first Save
@@ -21,25 +68,17 @@ const CreateTaskScheduler = () => {
   });
 
   const [savedJsonName, setSavedJsonName] = useState<string>("");
-
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [saveMessage, setSaveMessage] = useState<string>("");
 
   const computedDueDate = useMemo(() => {
     if (form.daysTillDue === "") return "";
     const days = Number(form.daysTillDue);
     if (!Number.isFinite(days) || days < 0) return "";
-
-    const d = new Date();
-    d.setDate(d.getDate() + days);
-
-    const yyyy = d.getFullYear();
-    const mm = String(d.getMonth() + 1).padStart(2, "0");
-    const dd = String(d.getDate()).padStart(2, "0");
-    return `${yyyy}-${mm}-${dd}`; // local date
-  }, [form.daysTillDue]);
+    return getBusinessDueDate(days, getAnchorDate(tasks));
+  }, [form.daysTillDue, tasks]);
 
   const jsonOutput = useMemo(() => {
-    // "won't write anything till first save"
     if (!savedJsonName || tasks.length === 0) return "";
 
     return JSON.stringify(
@@ -71,7 +110,7 @@ const CreateTaskScheduler = () => {
 
   const jsonNameLocked = !!savedJsonName;
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const taskName = form.taskName.trim();
@@ -96,34 +135,55 @@ const CreateTaskScheduler = () => {
       return;
     }
 
-    // Lock jsonName on the first Save
-    if (!savedJsonName) {
-      const name = form.jsonName.trim();
-      if (!name) {
-        alert("JSON Name is required on the first Save.");
-        return;
-      }
-      setSavedJsonName(name);
+    const templateName = form.jsonName.trim();
+    if (!savedJsonName && !templateName) {
+      alert("JSON Name is required on the first Save.");
+      return;
     }
+
+    const finalJsonName = savedJsonName || templateName;
 
     const newTask: Task = {
       taskName,
       note: form.note.trim(),
       daysTillDue: daysNum,
-      dueDate: computedDueDate, // local YYYY-MM-DD
+      dueDate: computedDueDate,
       adaptive: !!form.adaptive,
     };
 
-    setTasks((prev) => [...prev, newTask]);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/task-templates`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          jsonName: finalJsonName,
+          task: newTask,
+        }),
+      });
 
-    // Reset task inputs only; keep jsonName locked via savedJsonName
-    setForm((prev) => ({
-      ...prev,
-      taskName: "",
-      note: "",
-      daysTillDue: "",
-      adaptive: true,
-    }));
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Unable to save task template.");
+      }
+
+      setSavedJsonName(finalJsonName);
+      setTasks(data.template?.tasks || []);
+      setSaveMessage(`Saved to ${data.filePath}`);
+
+      setForm((prev) => ({
+        ...prev,
+        taskName: "",
+        note: "",
+        daysTillDue: "",
+        adaptive: true,
+      }));
+    } catch (error) {
+      console.error(error);
+      alert(error instanceof Error ? error.message : "Unable to save task template.");
+    }
   };
 
   return (
@@ -135,7 +195,7 @@ const CreateTaskScheduler = () => {
               Create Task Scheduler
             </h3>
             <p className="mt-1 text-sm text-gray-500">
-              Create tasks and generate a JSON with local computed due dates.
+              Create tasks task templates that may be utilized in the future.
             </p>
           </div>
 
@@ -143,7 +203,7 @@ const CreateTaskScheduler = () => {
             {/* JSON Name */}
             <div>
               <label className="mb-1 block text-sm font-medium text-gray-700">
-                JSON Name
+                Template Name
               </label>
               <input
                 type="text"
@@ -220,7 +280,7 @@ const CreateTaskScheduler = () => {
                 placeholder="e.g. 7"
               />
               <p className="mt-1 text-xs text-gray-500">
-                Local due date preview: {computedDueDate || "—"}
+                Business-day due date preview from latest task or today: {computedDueDate || "—"}
               </p>
             </div>
 
@@ -232,6 +292,7 @@ const CreateTaskScheduler = () => {
                 onClick={() => {
                   setTasks([]);
                   setSavedJsonName("");
+                  setSaveMessage("");
                   setForm({
                     jsonName: "",
                     taskName: "",
@@ -252,6 +313,12 @@ const CreateTaskScheduler = () => {
               </button>
             </div>
           </form>
+
+          {saveMessage ? (
+            <div className="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-700">
+              {saveMessage}
+            </div>
+          ) : null}
 
           {/* JSON output */}
           <div className="mt-6">

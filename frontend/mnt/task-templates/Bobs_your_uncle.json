@@ -1,0 +1,19 @@
+{
+  "jsonName": "Bobs_your_uncle",
+  "tasks": [
+    {
+      "taskName": "Sallys yur aunt",
+      "note": "",
+      "daysTillDue": 7,
+      "dueDate": "2026-08-18",
+      "adaptive": true
+    },
+    {
+      "taskName": "Call Bob",
+      "note": "call bob",
+      "daysTillDue": 3,
+      "dueDate": "2026-08-21",
+      "adaptive": true
+    }
+  ]
+}

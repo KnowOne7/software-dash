@@ -4,6 +4,7 @@ import DealsChart from "../../pages/crm/analytics/chart/dealsChart"
 import LastChart from "../../pages/main-menu/dashboard/deals-dashboard/charts/lastChart"
 import WonChart from "../../pages/main-menu/dashboard/deals-dashboard/charts/wonChart"
 import DealsYearChart from "../../pages/main-menu/dashboard/deals-dashboard/charts/dealsYearChart"
+import TaskTemplate from '../forms/task-template'
 import { all_routes } from "../../routes/all_routes"
 
 
@@ -38,6 +39,9 @@ const LayoutRTL = () => {
                             >
                                 <i className="ti ti-transition-top" />
                             </button>
+                        </div>
+                        <div>
+                            <TaskTemplate />
                         </div>
                     </div>
                     {/* End Page Header */}

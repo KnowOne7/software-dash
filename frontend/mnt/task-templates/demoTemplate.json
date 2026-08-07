@@ -1,0 +1,12 @@
+{
+  "jsonName": "demoTemplate",
+  "tasks": [
+    {
+      "taskName": "Follow up",
+      "note": "Test",
+      "daysTillDue": 3,
+      "dueDate": "2026-08-10",
+      "adaptive": true
+    }
+  ]
+}
