@@ -1,11 +1,17 @@
 
 
 export const all_routes = {
+
+  //custom routes
+  softwareDashboard: '/dashboard/software-dashboard',
+  taskTemplate: '/application/task-template',
+  taskTemplate2: '/application/task-template2',
+
   // dashboard routes
   dealsDashboard: "/dashboard/deals-dashboard",
   leadsDashboard: "/dashboard/leads-dashboard",
   projectDashboard: "/dashboard/project-dashboard",
-  softwareDashboard: '/dashboard/software-dashboard',
+
 
   //Super Admin
   superadminDashboard:"/super-admin/dashboard",

@@ -4,7 +4,16 @@ import { all_routes } from "./all_routes";
 import BlankPage from "../pages/application/blankPage";
 
 
-
+// custom routes
+const SoftwareDashboard = lazy(
+  () => import("../custom/pages/software-dashboard/softwareDashboard")
+);
+const TaskTemplate = lazy(
+  () => import("../custom/pages/taskTemplate")
+);
+const TaskTemplate2 = lazy(
+  () => import("../custom/pages/taskScheduler")
+);
 
 
 // Lazy-loaded components
@@ -38,9 +47,7 @@ const Dashboard = lazy(
 const LeadsDashboard = lazy(
   () => import("../pages/main-menu/dashboard/leads-dashboard/leadsDashboard")
 );
-const SoftwareDashboard = lazy(
-  () => import("../pages/main-menu/dashboard/software-dashboard/softwareDashboard")
-);
+
 const UiAccordion = lazy(
   () => import("../pages/ui-interface/base-ui/uiAccordion")
 );
@@ -2518,6 +2525,26 @@ export const publicRoutes = [
     </Suspense>
   ),
   meta_title: "ECharts",
+  },
+    {
+  id: "193",
+  path: route.taskTemplate,
+  element: (
+    <Suspense fallback={<div></div>}>
+      <TaskTemplate />
+    </Suspense>
+  ),
+  meta_title: "Task Template",
+  },
+    {
+  id: "194",
+  path: route.taskTemplate2,
+  element: (
+    <Suspense fallback={<div></div>}>
+      <TaskTemplate2 />
+    </Suspense>
+  ),
+  meta_title: "Task Template 2",
   },
 ];
 

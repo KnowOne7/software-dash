@@ -54,7 +54,10 @@ export const SidebarData: SidebarDataItem[] = [
             submenuItems: [],
             relatedRoutes: [route.email, route.emailReply] 
           },
+          { label: "Task Template", link: route.taskTemplate, submenu: false, submenuItems: [],   relatedRoutes: [route.todoList]  },
+          { label: "Task Template 2", link: route.taskTemplate2, submenu: false, submenuItems: [],   relatedRoutes: [route.todoList]  },
           { label: "To Do", link: route.todo, submenu: false, submenuItems: [],   relatedRoutes: [route.todoList]  },
+          
           { label: "Notes", link: route.notes, submenu: false, submenuItems: [] },
           { label: "File Manager", link: route.fileManager, submenu: false, submenuItems: [] },
           { label: "Social Feed", link: route.socialfeed, submenu: false, submenuItems: [] },
