@@ -10,6 +10,8 @@ import ImageWithBasePath from '../../../../components/image-with-base-path';
 import PredefinedDatePicker from '../../../../components/common-date-range-picker/PredefinedDatePicker';
 import CollapseIcons from '../../../../components/collapse-icons/collapseIcons';
 import CommonFooter from '../../../../components/common-footer/commonFooter';
+import EvmChart from '../../../../charts/evmChart';
+// import DATA from ./charts/evm.csv';
 
 const LeadsDashboard: FC = () => {
   useEffect(() => {
@@ -32,6 +34,26 @@ const LeadsDashboard: FC = () => {
               <CollapseIcons />
             </div>
           </div>
+
+
+
+
+
+
+        <div>
+          <div className="bg-white border border-borderColor rounded-lg shadow-sm flex flex-col w-full mb-5">
+            <div className="flex flex-wrap justify-between items-center gap-y-3 border-b border-borderColor px-4 py-3">
+              <h6 className="m-0">Earned Value Management</h6>
+              <EvmChart />
+
+            </div>
+          </div>
+
+        </div>
+
+
+
+
           {/* End Page Header */}
           <div className="flex flex-col md:flex-row md:gap-6">
             {/* Recently Created Deals */}
