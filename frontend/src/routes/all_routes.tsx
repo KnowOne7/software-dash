@@ -120,6 +120,7 @@ export const all_routes = {
   timeLine: "/ui-timeline",
   scrollBar: "/ui-scrollbar",
   apexChat: "/ui-apexchat",
+  echarts: "/ui-echarts",
   featherIcons: "/ui-feather-icon",
   falgIcons: "/icon-flag-icon",
   fantawesome: "/icon-fontawesome",

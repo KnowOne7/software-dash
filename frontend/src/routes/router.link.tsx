@@ -179,6 +179,9 @@ const DataTables = lazy(
 const UiApexchat = lazy(
   () => import("../pages/ui-interface/charts-ui/uiApexchat")
 );
+const UiEcharts = lazy(
+  () => import("../pages/ui-interface/charts-ui/uiEcharts")
+);
 
 // Icons
 const IconFontawesome = lazy(
@@ -452,7 +455,7 @@ export const publicRoutes = [
       </Suspense>
     ),
     route: Route,
-    meta_title: "Accordion",
+    meta_title: "Software Dashboard",
   },
   {
     id: "3",
@@ -2505,6 +2508,16 @@ export const publicRoutes = [
     ),
     route: Route,
     meta_title: "Accordion",
+  },
+  {
+  id: "192",
+  path: route.echarts,
+  element: (
+    <Suspense fallback={<div></div>}>
+      <UiEcharts />
+    </Suspense>
+  ),
+  meta_title: "ECharts",
   },
 ];
 
