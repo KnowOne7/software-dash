@@ -5,6 +5,7 @@ export const all_routes = {
   dealsDashboard: "/dashboard/deals-dashboard",
   leadsDashboard: "/dashboard/leads-dashboard",
   projectDashboard: "/dashboard/project-dashboard",
+  softwareDashboard: "/dashboard/software-dashboard",
 
   //Super Admin
   superadminDashboard:"/super-admin/dashboard",
@@ -119,6 +120,7 @@ export const all_routes = {
   timeLine: "/ui-timeline",
   scrollBar: "/ui-scrollbar",
   apexChat: "/ui-apexchat",
+  eChart: "/ui-echart",
   featherIcons: "/ui-feather-icon",
   falgIcons: "/icon-flag-icon",
   fantawesome: "/icon-fontawesome",

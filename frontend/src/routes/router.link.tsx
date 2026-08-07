@@ -30,6 +30,8 @@ const TicketDetails = lazy(() => import("../pages/support/tickets/ticketDetails"
 
 const ProjectDashboard = lazy(() => import("../pages/main-menu/dashboard/project-dashboard/projectDashboard"));
 
+const SoftwareDashboard = lazy(() => import("../pages/main-menu/dashboard/software-dashboard/softwareDashboard"));
+
 const LayoutRTL = lazy(() => import("../pages/layout-pages/layoutRTL"));
 const Login = lazy(() => import("../pages/authentication/login/login"));
 const Dashboard = lazy(
@@ -175,6 +177,9 @@ const DataTables = lazy(
 // Charts
 const UiApexchat = lazy(
   () => import("../pages/ui-interface/charts-ui/uiApexchat")
+);
+const UieChart = lazy(
+  () => import("../pages/ui-interface/charts-ui/uiEchart")
 );
 
 // Icons

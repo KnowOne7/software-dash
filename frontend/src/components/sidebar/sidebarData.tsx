@@ -13,6 +13,11 @@ export const SidebarData: SidebarDataItem[] = [
     tittle: "MAIN MENU",
     submenuItems: [
       {
+        label: "Dashboard", icon: "dashboard", link: route.softwareDashboard, submenu: false
+      },
+      
+      
+      {
         label: "Dashboard",
         link: "#",
         submenu: true,
@@ -21,6 +26,7 @@ export const SidebarData: SidebarDataItem[] = [
           { label: "Deals Dashboard", link: route.dealsDashboard, submenu: false, submenuItems: [] },
           { label: "Leads Dashboard", link: route.leadsDashboard, submenu: false, submenuItems: [] },
           { label: "Project Dashboard", link: route.projectDashboard, submenu: false, submenuItems: [] },
+          {label: "Software Dashboard", link: route.softwareDashboard, submenu: false, submenuItems: [] },
         ],
       },
       {
@@ -415,6 +421,7 @@ export const SidebarData: SidebarDataItem[] = [
         submenu: true,
         icon: "chart-pie-3",
         submenuItems: [
+          { label: "E Charts", link: route.eChart, submenu: false, submenuItems: [] },
           { label: "Apex Charts", link: route.apexChat, submenu: false, submenuItems: [] },
         ],
       },
