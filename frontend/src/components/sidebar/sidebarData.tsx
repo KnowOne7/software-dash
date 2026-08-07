@@ -21,6 +21,7 @@ export const SidebarData: SidebarDataItem[] = [
           { label: "Deals Dashboard", link: route.dealsDashboard, submenu: false, submenuItems: [] },
           { label: "Leads Dashboard", link: route.leadsDashboard, submenu: false, submenuItems: [] },
           { label: "Project Dashboard", link: route.projectDashboard, submenu: false, submenuItems: [] },
+          { label: "Software Dashboard", link: route.softwareDashboard, submenu: false, submenuItems: [] },
         ],
       },
       {

@@ -38,6 +38,9 @@ const Dashboard = lazy(
 const LeadsDashboard = lazy(
   () => import("../pages/main-menu/dashboard/leads-dashboard/leadsDashboard")
 );
+const SoftwareDashboard = lazy(
+  () => import("../pages/main-menu/dashboard/software-dashboard/softwareDashboard")
+);
 const UiAccordion = lazy(
   () => import("../pages/ui-interface/base-ui/uiAccordion")
 );
@@ -442,10 +445,10 @@ export const publicRoutes = [
   },
   {
     id: "2",
-    path: route.accordion,
+    path: route.softwareDashboard,
     element: (
       <Suspense fallback={<div></div>}>
-        <UiAccordion />
+        <SoftwareDashboard />
       </Suspense>
     ),
     route: Route,
@@ -2491,6 +2494,17 @@ export const publicRoutes = [
     ),
     route: Route,
     meta_title: "Blank Page",
+  },
+    {
+    id: "191",
+    path: route.accordion,
+    element: (
+      <Suspense fallback={<div></div>}>
+        <UiAccordion />
+      </Suspense>
+    ),
+    route: Route,
+    meta_title: "Accordion",
   },
 ];
 

@@ -5,6 +5,7 @@ export const all_routes = {
   dealsDashboard: "/dashboard/deals-dashboard",
   leadsDashboard: "/dashboard/leads-dashboard",
   projectDashboard: "/dashboard/project-dashboard",
+  softwareDashboard: '/dashboard/software-dashboard',
 
   //Super Admin
   superadminDashboard:"/super-admin/dashboard",
