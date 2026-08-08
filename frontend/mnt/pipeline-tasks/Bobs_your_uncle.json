@@ -1,0 +1,21 @@
+{
+  "jsonName": "Bobs_your_uncle",
+  "tasks": [
+    {
+      "taskName": "Sallys yur aunt",
+      "note": "",
+      "daysTillDue": 7,
+      "dueDate": "2026-08-18",
+      "adaptive": true
+    },
+    {
+      "taskName": "Call Bob",
+      "note": "call bob",
+      "daysTillDue": 3,
+      "dueDate": "2026-08-21",
+      "adaptive": true
+    }
+  ]
+}
+
+// update json location to /frontend/mnt/pipeline-tasks. remove the date aspect and only keep the number of days till due from last event to pipeline-tasks.tsx. Autofill with 5, but leave editable. Create a component that allows you to start one of the pipeline tasks from the drop down menu. incorporate the math into this, meaning in business days, do not assign any tasks on weekends. create a box field next to each task for who it is assigned to, default will be self.

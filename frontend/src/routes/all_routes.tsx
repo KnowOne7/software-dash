@@ -4,7 +4,7 @@ export const all_routes = {
 
   //custom routes
   softwareDashboard: '/dashboard/software-dashboard',
-  taskTemplate: '/application/task-template',
+  pipelineTasks: '/application/pipeline-tasks',
   taskTemplate2: '/application/task-template2',
 
   // dashboard routes

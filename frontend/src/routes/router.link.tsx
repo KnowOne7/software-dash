@@ -8,8 +8,8 @@ import BlankPage from "../pages/application/blankPage";
 const SoftwareDashboard = lazy(
   () => import("../custom/pages/software-dashboard/softwareDashboard")
 );
-const TaskTemplate = lazy(
-  () => import("../custom/pages/taskTemplate")
+const PipelineTasks = lazy(
+  () => import("../custom/pages/pipeline-tasks")
 );
 const TaskTemplate2 = lazy(
   () => import("../custom/pages/taskScheduler")
@@ -2528,10 +2528,10 @@ export const publicRoutes = [
   },
     {
   id: "193",
-  path: route.taskTemplate,
+  path: route.pipelineTasks,
   element: (
     <Suspense fallback={<div></div>}>
-      <TaskTemplate />
+      <PipelineTasks />
     </Suspense>
   ),
   meta_title: "Task Template",
