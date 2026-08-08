@@ -17,6 +17,25 @@ import "./style/custom.css";
 import "./style/style.css";
 import FlowbiteProvider from './providers/flowbiteProvider'
 
+const applyInitialTheme = () => {
+  if (typeof window === 'undefined') return;
+
+  const storedTheme = localStorage.getItem('themeSettings');
+  if (storedTheme) {
+    try {
+      const parsedTheme = JSON.parse(storedTheme);
+      if (parsedTheme['data-bs-theme']) {
+        document.documentElement.setAttribute('data-bs-theme', parsedTheme['data-bs-theme']);
+      }
+    } catch {
+      document.documentElement.setAttribute('data-bs-theme', 'dark');
+    }
+    return;
+  }
+
+  document.documentElement.setAttribute('data-bs-theme', 'dark');
+};
+
 // Ensure globals for jQuery plugins and moment consuming UMD builds
 const globalJquery = ( ($ as any).default ?? $ ) as any
 const globalMoment = ( (moment as any).default ?? moment ) as any
@@ -60,6 +79,8 @@ const FlowbiteInitializer = () => {
   
   return null;
 };
+
+applyInitialTheme();
 
 // Create a theme configuration if needed
 const theme = {

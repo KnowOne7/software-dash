@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const defaultThemeSettings = {
-  "data-bs-theme": "light",
-  "data-sidebar": "light",
+  "data-bs-theme": "dark",
+  "data-sidebar": "dark",
   "data-color": "primary",
   "data-topbar": "white",
   "data-layout": "default",

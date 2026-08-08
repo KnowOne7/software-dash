@@ -20,6 +20,19 @@ const pool = new Pool({
 
 const templatesDir = path.resolve(__dirname, "../frontend/mnt/task-templates");
 
+const resolveTemplatesDir = async () => {
+  try {
+    const stats = await fs.stat(templatesDir);
+    if (stats.isDirectory()) {
+      return templatesDir;
+    }
+  } catch {
+    await fs.mkdir(templatesDir, { recursive: true });
+  }
+
+  return templatesDir;
+};
+
 const normalizeTemplateName = (value) =>
   String(value || "")
     .trim()
@@ -36,6 +49,26 @@ const readTemplateFile = async (filePath) => {
     }
     throw error;
   }
+};
+
+const listTemplateFiles = async () => {
+  const activeTemplatesDir = await resolveTemplatesDir();
+  await fs.mkdir(activeTemplatesDir, { recursive: true });
+
+  const files = await fs.readdir(activeTemplatesDir);
+  const jsonFiles = files.filter((fileName) => fileName.endsWith(".json")).sort();
+
+  return Promise.all(
+    jsonFiles.map(async (fileName) => {
+      const filePath = path.join(activeTemplatesDir, fileName);
+      const template = await readTemplateFile(filePath);
+      return {
+        jsonName: template.jsonName || fileName.replace(/\.json$/, ""),
+        fileName,
+        taskCount: Array.isArray(template.tasks) ? template.tasks.length : 0,
+      };
+    })
+  );
 };
 
 app.get("/api/users", async (req, res) => {
@@ -61,9 +94,10 @@ app.post("/api/task-templates", async (req, res) => {
       return res.status(400).json({ error: "jsonName is invalid" });
     }
 
-    await fs.mkdir(templatesDir, { recursive: true });
+    const activeTemplatesDir = await resolveTemplatesDir();
+    await fs.mkdir(activeTemplatesDir, { recursive: true });
 
-    const filePath = path.join(templatesDir, `${safeName}.json`);
+    const filePath = path.join(activeTemplatesDir, `${safeName}.json`);
     const existingTemplate = await readTemplateFile(filePath);
     const existingTasks = Array.isArray(existingTemplate.tasks) ? existingTemplate.tasks : [];
 
@@ -82,6 +116,16 @@ app.post("/api/task-templates", async (req, res) => {
   }
 });
 
+app.get("/api/task-templates", async (req, res) => {
+  try {
+    const templates = await listTemplateFiles();
+    res.json(templates);
+  } catch (error) {
+    console.error("Task template list failed:", error);
+    res.status(500).json({ error: "Task template list failed" });
+  }
+});
+
 app.get("/api/task-templates/:jsonName", async (req, res) => {
   try {
     const safeName = normalizeTemplateName(req.params.jsonName);
@@ -89,12 +133,63 @@ app.get("/api/task-templates/:jsonName", async (req, res) => {
       return res.status(400).json({ error: "jsonName is invalid" });
     }
 
-    const filePath = path.join(templatesDir, `${safeName}.json`);
+    const activeTemplatesDir = await resolveTemplatesDir();
+    const filePath = path.join(activeTemplatesDir, `${safeName}.json`);
     const template = await readTemplateFile(filePath);
     res.json(template);
   } catch (error) {
     console.error("Task template read failed:", error);
     res.status(500).json({ error: "Task template read failed" });
+  }
+});
+
+app.put("/api/task-templates/:jsonName", async (req, res) => {
+  try {
+    const safeName = normalizeTemplateName(req.params.jsonName);
+    if (!safeName) {
+      return res.status(400).json({ error: "jsonName is invalid" });
+    }
+
+    const payload = req.body && typeof req.body === "object" ? req.body : null;
+    if (!payload) {
+      return res.status(400).json({ error: "Template payload is required" });
+    }
+
+    const template = {
+      ...payload,
+      jsonName: safeName,
+    };
+
+    const activeTemplatesDir = await resolveTemplatesDir();
+    const filePath = path.join(activeTemplatesDir, `${safeName}.json`);
+    await fs.mkdir(activeTemplatesDir, { recursive: true });
+    await fs.writeFile(filePath, JSON.stringify(template, null, 2), "utf8");
+
+    res.json({ success: true, filePath, template });
+  } catch (error) {
+    console.error("Task template update failed:", error);
+    res.status(500).json({ error: "Task template update failed" });
+  }
+});
+
+app.delete("/api/task-templates/:jsonName", async (req, res) => {
+  try {
+    const safeName = normalizeTemplateName(req.params.jsonName);
+    if (!safeName) {
+      return res.status(400).json({ error: "jsonName is invalid" });
+    }
+
+    const activeTemplatesDir = await resolveTemplatesDir();
+    const filePath = path.join(activeTemplatesDir, `${safeName}.json`);
+    await fs.unlink(filePath);
+    res.json({ success: true });
+  } catch (error) {
+    if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") {
+      return res.status(404).json({ error: "Template not found" });
+    }
+
+    console.error("Task template delete failed:", error);
+    res.status(500).json({ error: "Task template delete failed" });
   }
 });
 
