@@ -6,14 +6,14 @@ import PredefinedDatePicker from '../../../components/common-date-range-picker/P
 import CollapseIcons from '../../../components/collapse-icons/collapseIcons';
 import CommonFooter from '../../../components/common-footer/commonFooter';
 import EvmChart from '../../charts/evmChart';
-import evmCsvData from '../../../../imported_data/evm.csv?raw';
+import evmCsvData from '../../../../mnt/imported_data/evm.csv?raw';
 import ChartVelocity from "../../charts/chartVelocity";
 import ChartBurnProxy from "../../charts/chartBurnProxy";
 import ChartWorkloadProxy from "../../charts/ChartWorkloadProxy";
 import { parseCsv, type Row } from "../../charts/parseCsv";
-import sprintSummaryCsv from "../../../../imported_data/sprint_summary.csv?raw"; // adjust this path if needed
-import burnProxyCsv from "../../../../imported_data/burn_proxy.csv?raw";
-import perPersonCsv from "../../../../imported_data/per_person.csv?raw";
+import sprintSummaryCsv from "../../../../mnt/imported_data/sprint_summary.csv?raw"; // adjust this path if needed
+import burnProxyCsv from "../../../../mnt/imported_data/burn_proxy.csv?raw";
+import perPersonCsv from "../../../../mnt/imported_data/per_person.csv?raw";
 import MarkdownBlock from '../../../components/markdown/MarkdownBlock';
 import evmMarkdown from '../../charts/evm.md?raw';
 import flowChartMarkdown from '../../charts/flowchart.md?raw';
